@@ -1,13 +1,4 @@
-/**
- * assets/js/main.js
- * Small, dependency-free interactions: mobile nav toggle,
- * ticket quantity stepper with live total, and the demo
- * "get tickets" confirmation modal.
- */
-
 document.addEventListener('DOMContentLoaded', function () {
-
-  // ---- Mobile nav toggle ----
   var navToggle = document.getElementById('navToggle');
   var mainNav = document.getElementById('mainNav');
   if (navToggle && mainNav) {
@@ -17,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---- Ticket quantity stepper ----
   var stepper = document.querySelector('.qty-stepper');
   if (stepper) {
     var unitPrice = parseFloat(stepper.dataset.price || '0');
@@ -44,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---- Demo "get tickets" modal ----
   var getTicketsBtn = document.getElementById('getTicketsBtn');
   var ticketModal = document.getElementById('ticketModal');
   var closeModalBtn = document.getElementById('closeModalBtn');

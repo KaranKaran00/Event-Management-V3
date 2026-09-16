@@ -1,9 +1,4 @@
 <?php
-/**
- * includes/header.php
- * Shared top of every page: <head>, opening <body>, and the nav bar.
- * Expects an optional $pageTitle to be set by the including page.
- */
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

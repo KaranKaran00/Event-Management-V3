@@ -1,8 +1,4 @@
 <?php
-/**
- * includes/footer.php
- * Shared bottom of every page: footer markup, closing tags, scripts.
- */
 ?>
 <footer class="site-footer">
   <div class="container footer-inner">

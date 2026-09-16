@@ -1,9 +1,4 @@
 <?php
-/**
- * signup.php
- * Demo-only registration: there is no database, so submitting the
- * form just stores the entered name/email in the session.
- */
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -21,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($password !== $confirm) {
         $error = 'Passwords do not match.';
     } else {
-        // Check if email already exists
         $stmt = mysqli_prepare($conn, "SELECT id FROM users WHERE email = ?");
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
@@ -30,9 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_stmt_num_rows($stmt) > 0) {
             $error = 'This email address is already registered.';
         } else {
-            // Hash password securely
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            // Insert user
             $insertStmt = mysqli_prepare($conn, "INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
             mysqli_stmt_bind_param($insertStmt, "sss", $name, $email, $hashedPassword);
             
@@ -51,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
 
 $pageTitle = 'Sign up — EventHub';
 require_once __DIR__ . '/includes/header.php';

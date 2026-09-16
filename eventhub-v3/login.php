@@ -1,10 +1,4 @@
 <?php
-/**
- * login.php
- * Demo-only auth: there is no database, so any email/password
- * combination "logs in" and stores a name in the session.
- * Swap this for real credential checks if you add a database.
- */
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -45,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $pageTitle = 'Log in — EventHub';
 require_once __DIR__ . '/includes/header.php';
 ?>
-
 
 <section class="section auth-section">
   <div class="container auth-container">
