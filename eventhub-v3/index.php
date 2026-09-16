@@ -90,13 +90,7 @@ $trending = array_slice($events, 0, 6);
   </div>
 </section>
 
-    
 <?php
-// ==================================================
-// Instagram Feed Section — pulled from instagram_posts table.
-// Admins add/remove links via admin_instagram.php; this list
-// updates automatically, no code changes needed.
-// ==================================================
 $instagramPosts = [];
 $igResult = mysqli_query($conn, "SELECT post_url FROM instagram_posts WHERE is_active = 1 ORDER BY created_at DESC LIMIT 9");
 if ($igResult) {
@@ -109,30 +103,17 @@ if ($igResult) {
 <?php if (!empty($instagramPosts)): ?>
 <section class="section instagram-section">
     <div class="container">
-
         <div class="section-head">
             <h2>Follow Us On Instagram</h2>
-            <a href="https://instagram.com/Czmgbca"
-               target="_blank"
-               class="see-all">
-                View Profile →
-            </a>
+            <a href="https://instagram.com/Czmgbca" target="_blank" class="see-all">View Profile →</a>
         </div>
-
         <div class="instagram-grid">
             <?php foreach ($instagramPosts as $post): ?>
-                <blockquote
-                    class="instagram-media"
-                    data-instgrm-permalink="<?= htmlspecialchars($post['post_url']) ?>"
-                    data-instgrm-version="14">
-                </blockquote>
+                <blockquote class="instagram-media" data-instgrm-permalink="<?= htmlspecialchars($post['post_url']) ?>" data-instgrm-version="14"></blockquote>
             <?php endforeach; ?>
         </div>
-
     </div>
 </section>
-
-<!-- Instagram Official Script -->
 <script async src="//www.instagram.com/embed.js"></script>
 <?php endif; ?>
 

@@ -1,9 +1,4 @@
 <?php
-/**
- * admin_instagram.php
- * Admin-only page for pasting Instagram post links, which then
- * appear automatically in the Instagram feed section on index.php.
- */
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -21,12 +16,11 @@ require_once __DIR__ . '/db.php';
 $error = '';
 $success = '';
 
-// Add a new post
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])) {
     $url = trim($_POST['post_url'] ?? '');
     $caption = trim($_POST['caption'] ?? '');
 
-    if (!preg_match('#^https?://(www\.)?instagram\.com/(p|reel)/[A-Za-z0-9_-]+/?#', $url)) {
+    if (!preg_match('#^https?://(www\\.)?instagram\\.com/(p|reel)/[A-Za-z0-9_-]+/?#', $url)) {
         $error = 'Please paste a valid Instagram post or reel link (e.g. https://www.instagram.com/p/XXXXXXXXX/).';
     } else {
         $adminId = $_SESSION['user']['id'];
@@ -40,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])) {
     }
 }
 
-// Delete a post
 if (isset($_GET['delete'])) {
     $id = (int) $_GET['delete'];
     $stmt = mysqli_prepare($conn, "DELETE FROM instagram_posts WHERE id = ?");
@@ -50,7 +43,6 @@ if (isset($_GET['delete'])) {
     exit;
 }
 
-// Show/hide a post without deleting it
 if (isset($_GET['toggle'])) {
     $id = (int) $_GET['toggle'];
     $stmt = mysqli_prepare($conn, "UPDATE instagram_posts SET is_active = 1 - is_active WHERE id = ?");

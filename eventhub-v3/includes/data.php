@@ -1,16 +1,6 @@
 <?php
-/**
- * data.php
- * ---------------------------------------------------------
- * In-memory sample data for EventHub.
- * This is a STATIC demo (no database), so categories and
- * events live here as PHP arrays. Swap this file for real
- * database queries (e.g. PDO + MySQL) if you add persistence.
- * ---------------------------------------------------------
- */
 require_once __DIR__ . '/../db.php';
 
-// Fetch categories from the database
 $categories = [];
 $catQuery = "SELECT * FROM categories";
 $catResult = mysqli_query($conn, $catQuery);
@@ -20,7 +10,6 @@ if ($catResult) {
     }
 }
 
-// Fetch events from the database
 $events = [];
 $evtQuery = "SELECT * FROM events ORDER BY date ASC, time ASC";
 $evtResult = mysqli_query($conn, $evtQuery);
@@ -39,10 +28,6 @@ function getCategory(string $slug, array $categories): ?array {
     return null;
 }
 
-/**
- * Filter events by free-text query, category slug and price tier.
- * Pure array filtering since there is no database in this build.
- */
 function filterEvents(array $events, string $query = '', string $category = '', string $price = 'all'): array {
     return array_values(array_filter($events, function ($e) use ($query, $category, $price) {
         $matchesQuery = true;
